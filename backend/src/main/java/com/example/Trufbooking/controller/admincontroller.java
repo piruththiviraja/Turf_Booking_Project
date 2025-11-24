@@ -4,6 +4,7 @@ import com.example.Trufbooking.entity.admintable;
 import com.example.Trufbooking.entity.turfDto;
 import com.example.Trufbooking.repository.admintable_repo;
 import com.example.Trufbooking.service.adminservice;
+import com.example.Trufbooking.service.userservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/home")
+//@CrossOrigin(origins = "http://localhost:5173")
 @CrossOrigin(origins = "http://localhost:5173")
 public class admincontroller {
 
@@ -20,6 +22,8 @@ public class admincontroller {
     adminservice adminser;
     @Autowired
     admintable_repo adminrepo;
+    @Autowired
+    userservice userser;
 
     @GetMapping("/locations")
     public List<String> getDistinctLocations() {
@@ -41,6 +45,7 @@ public class admincontroller {
 
         List<Map<String, Object>> turfsWithImages = new ArrayList<>();
         for (admintable turf : turfs) {
+
             Map<String, Object> turfMap = new HashMap<>();
             turfMap.put("turfid",turf.getTurfid());
             turfMap.put("turfname", turf.getTurfname());
@@ -50,7 +55,7 @@ public class admincontroller {
             turfMap.put("sports", turf.getSports());
             turfMap.put("length", turf.getLength());
             turfMap.put("breadth", turf.getBreadth());
-
+            turfMap.put("rating",userser.showRating(turf.getTurfid()));
             try {
                 if (turf.getImage() != null) {
                     byte[] imageBytes = turf.getImage().getBytes(1, (int) turf.getImage().length());

@@ -1,9 +1,6 @@
 package com.example.Trufbooking.controller;
 
-import com.example.Trufbooking.entity.UserInfo;
-import com.example.Trufbooking.entity.admintable;
-import com.example.Trufbooking.entity.userdto;
-import com.example.Trufbooking.entity.usertable;
+import com.example.Trufbooking.entity.*;
 import com.example.Trufbooking.repository.Userinforepo;
 import com.example.Trufbooking.repository.userrepository;
 import com.example.Trufbooking.service.userservice;
@@ -28,8 +25,8 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 import java.util.*;
-
 @CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/home")
 public class usercontroller {
@@ -205,6 +202,10 @@ public class usercontroller {
                 .body(Collections.singletonMap("error", "User not found")));
     }
 
+    @PostMapping("/ratings")
+    public double setUserRatings (@RequestBody TurfsRatingsDTO userRating){
+        return userser.UserRating(userRating);
+    }
 
 }
 

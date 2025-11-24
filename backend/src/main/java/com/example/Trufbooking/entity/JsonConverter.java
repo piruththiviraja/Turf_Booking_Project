@@ -9,7 +9,7 @@ import java.util.List;
 
 @Converter
 public class JsonConverter implements AttributeConverter<List<String>, String> {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public String convertToDatabaseColumn(List<String> attribute) {

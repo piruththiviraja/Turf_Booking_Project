@@ -22,7 +22,6 @@ function TurfDetails() {
 
                 const initialRatings = {};
                 response.data.forEach((turf) => {
-                    console.log(turf.admin_id)
                     initialRatings[turf.turfid] = turf.rating || 0;
                 });
                 setRatings(initialRatings);
@@ -63,10 +62,18 @@ function TurfDetails() {
     };
 
     const handleRatingClick = (turfId, newRating) => {
-        setRatings((prevRatings) => ({
-            ...prevRatings,
-            [turfId]: newRating,
-        }));
+        console.log(newRating);
+        axios.post(`${import.meta.env.VITE_API_URL}/home/ratings`,{
+            turfId: turfId,
+            userRating: newRating,
+            userEmail: userEmail
+            }).then(()=>{
+                setRatings((prevRatings) => ({
+                            ...prevRatings,
+                            [turfId]: newRating,
+                        }));
+                } ).catch((error) => console.log(error));
+
     };
 
     const containerStyle = {

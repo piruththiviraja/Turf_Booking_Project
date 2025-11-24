@@ -15,6 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/home")
+//@CrossOrigin(origins = "http://localhost:5173")
 @CrossOrigin(origins = "http://localhost:5173")
 public class slotcontroller {
 

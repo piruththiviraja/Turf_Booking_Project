@@ -1,13 +1,8 @@
 package com.example.Trufbooking.service;
 
-import com.example.Trufbooking.entity.UserInfo;
-import com.example.Trufbooking.entity.admintable;
-import com.example.Trufbooking.entity.userdto;
-import com.example.Trufbooking.entity.usertable;
-import com.example.Trufbooking.repository.Userinforepo;
-import com.example.Trufbooking.repository.Userloginauthrepo;
-import com.example.Trufbooking.repository.turfrepo;
-import com.example.Trufbooking.repository.userrepository;
+import com.example.Trufbooking.entity.*;
+import com.example.Trufbooking.repository.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,9 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
+import static com.example.Trufbooking.entity.JsonConverter.objectMapper;
 
 @Slf4j
 @Service
@@ -32,6 +27,9 @@ public class userservice {
     private turfrepo turfRepository;
     @Autowired
     private Userloginauthrepo userloginauth;
+
+    @Autowired
+    private RatingRepo ratingRepo;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -130,7 +128,64 @@ public class userservice {
 //
 //        return userrepo.save(user);  // Save the updated user object back to the repository
 //    }
+    public double UserRating(TurfsRatingsDTO userRating){
+        Optional<TurfsRatings> turf = ratingRepo.findById(userRating.getTurfId()); // checks whether that turf is already rated by someone
+       if(turf.isPresent()){
+           double average;
+           TurfsRatings existingTurf = turf.get(); // contains the turfRatings outDated
+           String userRatings = existingTurf.getUserRatings();
+           try {
+               Map<String,Integer> ratings = objectMapper.readValue(userRatings,Map.class);
+               ratings.put(userRating.getUserEmail(),userRating.getUserRating()); // just update the rating of that user
+               double total = 0;
+               for(Integer rating: ratings.values()){
+                   total = total+ rating;
+                   System.out.println(total);
+               }
+               System.out.println("average");
+               average = total/ratings.size();
+               existingTurf.setAverage(average);
+               System.out.println(average);
+               try {
+                   String Ratings = objectMapper.writeValueAsString(ratings);
+                   existingTurf.setUserRatings(Ratings);
+                   ratingRepo.save(existingTurf);
+               } catch (JsonProcessingException e) {
+                   throw new RuntimeException(e);
+               }
 
+               return average;
+           } catch (JsonProcessingException e) {
+               throw new RuntimeException(e);
+           }
+       }
+       else{
+           TurfsRatings newTurf = new TurfsRatings();
+           newTurf.setTurfId(userRating.getTurfId());
+           Map<String,Integer> userRatings = new HashMap<>();
+           userRatings.put(userRating.getUserEmail(),userRating.getUserRating());
+           try {
+               String Ratings = objectMapper.writeValueAsString(userRatings);
+               newTurf.setUserRatings(Ratings);
+               double average =  userRating.getUserRating();
+               newTurf.setAverage(average);
+               ratingRepo.save(newTurf);
+               return average;
+           } catch (JsonProcessingException e) {
+               throw new RuntimeException(e);
+           }
+
+       }
+    }
+
+    public double showRating(int turfId){
+        Optional<TurfsRatings> turfRating = ratingRepo.findById(turfId);
+        if(turfRating.isPresent()){
+            TurfsRatings rating = turfRating.get();
+            return rating.getAverage();
+        }
+        return 0;
+    }
 
 }
 
