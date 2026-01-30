@@ -28,7 +28,7 @@ public class BookingController {
     }
     @GetMapping("/{email}")
     public List<Booking> getBookingsByEmail(@PathVariable String email) {
-        System.out.println("My guess: "+ bookingRepository.findByEmail(email).getFirst().getBooking_id());
+        // System.out.println("My guess: "+ bookingRepository.findByEmail(email).getFirst().getBooking_id());
         return bookingRepository.findByEmail(email);
     }
     @DeleteMapping("/{bookingId}")

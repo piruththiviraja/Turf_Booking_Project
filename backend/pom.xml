@@ -14,7 +14,7 @@
 	<description>Turf Management System project</description>
 
 	<properties>
-		<java.version>23</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
