@@ -1,27 +1,27 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar.jsx';
-import Footer from './components/Footer.jsx';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage'
 import LocationAndSports from './pages/LocationAndSports';
-import {AuthProvider} from "./utils/AuthContext.jsx";
-import ProtectedRoute from "./utils/ProtectedRoute.jsx";
-import TurfDetails from "./Pages/TurfDetails.jsx";
-import SlotDetails from "./Pages/SlotDetails.jsx";
-import ConfirmPayment from "./Pages/ConfirmPayment.jsx";
-import UserProfile from "./Pages/UserProfile.jsx";
-import Wishlist from "./Pages/Wishlist.jsx";
-import EditProfile from "./Pages/EditProfile.jsx";
-import AdminLogin from "./Pages/AdminLogin.jsx";
-import AdminSignup from "./Pages/AdminSignup.jsx";
-import AddTurfForm from "./Pages/AddTurfForm.jsx";
-import UpdateTurf from "./Pages/UpdateTurf.jsx";
-import EditTurf from "./Pages/EditTurf.jsx";
-import SetSlot from "./Pages/SetSlot.jsx";
-import BookingDetails from "./Pages/BookingDetails.jsx";
-import PaymentPage from "./Pages/FinalPay.jsx";
-import EditBooking from "./Pages/EditBooking.jsx";
+import {AuthProvider} from "./utils/AuthContext";
+import ProtectedRoute from "./utils/ProtectedRoute";
+import TurfDetails from "./Pages/TurfDetails";
+import SlotDetails from "./Pages/SlotDetails";
+import ConfirmPayment from "./Pages/ConfirmPayment";
+import UserProfile from "./Pages/UserProfile";
+import Wishlist from "./Pages/Wishlist";
+import EditProfile from "./Pages/EditProfile";
+import AdminLogin from "./Pages/AdminLogin";
+import AdminSignup from "./Pages/AdminSignup";
+import AddTurfForm from "./Pages/AddTurfForm";
+import UpdateTurf from "./Pages/UpdateTurf";
+import EditTurf from "./Pages/EditTurf";
+import SetSlot from "./Pages/SetSlot";
+import BookingDetails from "./Pages/BookingDetails";
+import PaymentPage from "./Pages/FinalPay";
+import EditBooking from "./Pages/EditBooking";
 const App = () => {
   return (
 
