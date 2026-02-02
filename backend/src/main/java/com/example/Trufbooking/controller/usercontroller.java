@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 import java.util.*;
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://turfbookingsystem-xi.vercel.app")
 //@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/home")

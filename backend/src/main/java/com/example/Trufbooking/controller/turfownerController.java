@@ -25,7 +25,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://turfbookingsystem-xi.vercel.app")
 //@CrossOrigin(origins = "http://localhost:5173")
 public class turfownerController {
     @Autowired

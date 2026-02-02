@@ -15,7 +15,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/home")
 //@CrossOrigin(origins = "http://localhost:5173")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://turfbookingsystem-xi.vercel.app")
 public class admincontroller {
 
     @Autowired
