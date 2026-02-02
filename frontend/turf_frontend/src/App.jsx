@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Navbar from './components/navigation';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import SignupPage from './pages/SignupPage';
-import LoginPage from './pages/LoginPage'
-import LocationAndSports from './pages/LocationAndSports';
+import HomePage from './Pages/HomePage';
+import SignupPage from './Pages/SignupPage';
+import LoginPage from './Pages/LoginPage'
+import LocationAndSports from './Pages/LocationAndSports';
 import {AuthProvider} from "./utils/AuthContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import TurfDetails from "./Pages/TurfDetails";
