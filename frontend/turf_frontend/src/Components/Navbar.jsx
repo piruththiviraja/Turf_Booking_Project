@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+ 
 const Navbar = () => {
     const { isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
